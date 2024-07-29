@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TheBestShop</title>
+
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+	crossorigin="anonymous">
+
+<style>
+select.form-control.bg-transparent.text-light option {
+	background-color: #343a40;
+	color: white;
+}
+
+select.form-control.bg-transparent.text-light:focus {
+	outline: none;
+	box-shadow: 0 0 0 0.2rem rgba(108, 117, 125, 0.5);
+}
+</style>
+</head>
+<body>
+	<div class="container bg-dark text-light p-4">
+		<div class="row">
+			<div class="col-md-8 mx-auto rounded border p-4 m-4">
+				<h2 class="text-center mb-5">Editar Producto</h2>
+				<form method="post" enctype="multipart/form-data"
+					th:object="${productoDto}">
+
+					<div class="row mb-3">
+						<label class="col-sm-4 col-form-label">Id</label>
+						<div class="col-sm-8">
+							<input readonly
+								class="form-control-plaintext bg-transparent text-light"
+								th:value="${producto.id}">
+						</div>
+					</div>
+
+					<div class="row mb-3">
+						<label class="col-sm-4 col-form-label">Nombre</label>
+						<div class="col-sm-8">
+							<input class="form-control bg-transparent text-light"
+								th:field="*{nombre}">
+							<p th:if="${#fields.hasErrors('nombre')}"
+								th:errorclass="text-warning" th:errors="${productoDto.nombre}"></p>
+						</div>
+					</div>
+
+					<div class="row mb-3">
+						<label class="col-sm-4 col-form-label">Marca</label>
+						<div class="col-sm-8">
+							<input class="form-control bg-transparent text-light"
+								th:field="*{marca}">
+							<p th:if="${#fields.hasErrors('marca')}"
+								th:errorclass="text-warning" th:errors="${productoDto.marca}"></p>
+						</div>
+					</div>
+
+					<div class="row mb-3">
+						<label class="col-sm-4 col-form-label">Categoría</label>
+						<div class="col-sm-8">
+							<select class="form-control bg-transparent text-light"
+								th:field="*{categoria}">
+								<option value="Otros">Otros</option>
+								<option value="Celulares">Celulares</option>
+								<option value="Computadores">Computadores</option>
+								<option value="Accesorios">Accesorios</option>
+								<option value="Impresoras">Impresoras</option>
+								<option value="Camaras">Cámaras</option>
+							</select>
+							<p th:if="${#fields.hasErrors('categoria')}"
+								th:errorclass="text-warning" th:errors="${productoDto.categoria}"></p>
+						</div>
+					</div>
+
+					<div class="row mb-3">
+						<label class="col-sm-4 col-form-label">Precio</label>
+						<div class="col-sm-8">
+							<input class="form-control bg-transparent text-light"
+								type="number" step="0.01" min="0" th:field="${productoDto.precio}">
+							<p th:if="${#fields.hasErrors('precio')}"
+								th:errorclass="text-warning" th:errors="${productoDto.precio}"></p>
+						</div>
+					</div>
+
+					<div class="row mb-3">
+						<label class="col-sm-4 col-form-label">Descripción</label>
+						<div class="col-sm-8">
+							<textarea class="form-control bg-transparent text-light"
+								th:field="${productoDto.descripcion}"></textarea>
+							<p th:if="${#fields.hasErrors('descripcion')}"
+								th:errorclass="text-warning" th:errors="${productoDto.descripcion}"></p>
+						</div>
+					</div>
+
+					<div class="row mb-3">
+						
+						<div class="offset-sm-4 col-sm-8">
+							<img th:src="@{'/images/' + ${producto.nombreArchivoImagen}}" alt="..." width="150">
+						</div>
+					</div>
+						
+					<div class="row mb-3">
+						<label class="col-sm-4 col-form-label">Imagen</label>
+						<div class="col-sm-8">
+							<input type="file" class="form-control bg-transparent text-light"
+								th:field="*{archivoImagen}">
+							<p th:if="${#fields.hasErrors('archivoImagen')}"
+								th:errorclass="text-warning" th:errors="${productoDto.archivoImagen}"></p>
+						</div>
+					</div>
+					
+					<div class="row mb-3">
+						<label class="col-sm-4 col-form-label">Creado en</label>
+						<div class="col-sm-8">
+							<input readonly
+								class="form-control-plaintext bg-transparent text-light"
+								th:value="${producto.fechaCreacion}">
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="offset-sm-4 col-md-4 d-grid">
+							<button type="submit" class="btn btn-outline-primary">Enviar</button>
+						</div>
+						<div class="col-md-4 d-grid">
+							<a class="btn btn-outline-danger" href="/productos" role="button">Cancelar</a>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+		crossorigin="anonymous"></script>
+</body>
+</html>
